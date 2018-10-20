@@ -8,7 +8,7 @@ const ejs = require('ejs');
 const path = require('path');
 const session = require('express-session');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf47a430e0f2', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: false,
@@ -19,3 +19,11 @@ const sequelize = new Sequelize('database', 'username', 'password', {
     idle: 10000
   }
 });
+//define model
+require('./model/verbe.js')(sequelize);
+require('./model/mots.js')(sequelize);
+sequelize.sync().then(() => {
+  console.log("DB created")
+}).catch(error => {
+  console.log(error)
+})
