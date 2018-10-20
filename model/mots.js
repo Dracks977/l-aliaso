@@ -9,13 +9,13 @@ module.exports = (sequelize, Sequelize) => {
 			type: Sequelize.STRING,
 			allowNull: false,
 			unique: true
-		}
+		},
 		verbe : {
 			type : Sequelize.INTEGER,
-			allowNull: true
+			allowNull: true,
 			references: {
 				model: verbe,
-				key: 'id',
+				key: 'id'
 			}
 		}
 	});
