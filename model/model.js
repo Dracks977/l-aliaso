@@ -40,7 +40,7 @@ module.exports = (sequelize, Sequelize) => {
 			allowNull: false,
 			unique: true
 		},
-		cl: {
+		al: {
 			type: Sequelize.STRING,
 			allowNull: false,
 			unique: true
