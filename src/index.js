@@ -9,6 +9,6 @@ module.exports = function(app, path, ejs, fs, sequelize){
 			let renderedHtml = ejs.render(content, {});
 			res.end(renderedHtml);
 		});
-	}
-	
+	});
+
 }
