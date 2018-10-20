@@ -20,8 +20,8 @@ const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf4
   }
 });
 //define model
-require('./model/verbe.js')(sequelize,Sequelize);
-require('./model/mots.js')(sequelize,Sequelize);
+let Verbe = require('./model/verbe.js')(sequelize,Sequelize);
+require('./model/mots.js')(sequelize,Sequelize,Verbe);
 
 sequelize.sync().then(() => {
   console.log("DB created")
