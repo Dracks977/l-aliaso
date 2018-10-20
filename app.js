@@ -22,8 +22,24 @@ const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf4
 //define model
 require('./model/verbe.js')(sequelize);
 require('./model/mots.js')(sequelize);
+
 sequelize.sync().then(() => {
   console.log("DB created")
 }).catch(error => {
   console.log(error)
 })
+
+// Middleware session
+app.engine('html', require('ejs').renderFile);
+
+app.use(session({
+  resave: false, // don't save session if unmodified
+  saveUninitialized: false, // don't create session until something stored
+  secret: "clang",
+}));
+
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+	extended: true
+})); 
