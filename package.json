@@ -1,0 +1,19 @@
+{
+  "name": "l-aliaso",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dracks977/l-aliaso.git"
+  },
+  "author": "Dracks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dracks977/l-aliaso/issues"
+  },
+  "homepage": "https://github.com/Dracks977/l-aliaso#readme"
+}
