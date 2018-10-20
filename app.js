@@ -1,3 +1,4 @@
+/*=====================Initialisation=====================*/
 const express = require("express");
 const app = express();
 const http = require('http').Server(app);
@@ -6,6 +7,7 @@ const fs = require('fs');
 const bodyParser = require('body-parser')
 const ejs = require('ejs');
 const path = require('path');
+/*=====================Database=====================*/
 const session = require('express-session');
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf47a430e0f2', {
@@ -20,15 +22,14 @@ const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf4
   }
 });
 //define model
-//let Verbe = require('./model/verbe.js')(sequelize,Sequelize);
-require('./model/mots.js')(sequelize,Sequelize);
+require('./model/model.js')(sequelize,Sequelize);
 
 sequelize.sync().then(() => {
   console.log("DB created")
 }).catch(error => {
   console.log(error)
 })
-
+/*======================Settings App====================*/
 // Middleware session
 app.engine('html', require('ejs').renderFile);
 
@@ -43,3 +44,16 @@ app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 	extended: true
 })); 
+
+/*======================Route fichier static (public)====================*/
+app.use("/css", express.static(__dirname + '/public/css'));
+app.use("/img", express.static(__dirname + '/public/img'));
+app.use("/js", express.static(__dirname + '/public/js'));
+
+/*======================Routes==========================*/ 
+require('./src/index.js')(app, path, ejs, fs, sequelize);
+
+/*==================Start serv==================*/
+http.listen(3000, function(){
+	console.log('listening on *:' + 3000);
+});

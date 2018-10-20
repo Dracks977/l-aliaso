@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-	const Verbes = sequelize.define('mots', {
+	const Verbes = sequelize.define('verbes', {
 		'1': {
 			type: Sequelize.STRING,
 			allowNull: false,
@@ -33,7 +33,7 @@ module.exports = (sequelize, Sequelize) => {
 			allowNull: false,
 		}
 	});
-	
+
 	const Mots = sequelize.define('mots', {
 		fr: {
 			type: Sequelize.STRING,
