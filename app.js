@@ -10,7 +10,7 @@ const path = require('path');
 /*=====================Database=====================*/
 const session = require('express-session');
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('test', 'seat', 'da8c96d1f2928e3c117d37b3beaedf47a430e0f2', {
+const sequelize = new Sequelize('aliaso', 'user', 'user', {
   host: 'localhost',
   dialect: 'mysql',
   operatorsAliases: false,
