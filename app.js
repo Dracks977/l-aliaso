@@ -11,15 +11,20 @@ const path = require('path');
 const session = require('express-session');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/aliaso');
-db.on('error', console.error.bind(console, 'connection error:'));
+let db = mongoose.connection;
+db.on('error', function(err){
+  process.exit(1)
+});
 db.once('open', function() {
-  console.log('all ok')
+  console.log('Connected')
 });
 
 //define model
 require('./model/model.js')(mongoose);
-var silence = new mot({al: 'test'})
-console.log(silence.al)
+MOTS.findOne({al: 'test'}, function(err, m){
+  m.traduction.fr.push('une autre traduction')
+  m.save()
+})
 
 /*======================Settings App====================*/
 // Middleware session

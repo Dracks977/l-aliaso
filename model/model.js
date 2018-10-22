@@ -1,8 +1,7 @@
 module.exports = (mongoose) => {
 	let Schema = mongoose.Schema;
 	let Mots = new Schema({
-		al:  {type: String, required: true}
-		comments: [{ body: String, date: Date }],
+		al:  {type: String, required: true},
 		traduction: {
 			fr: [String]
 		},
@@ -11,8 +10,16 @@ module.exports = (mongoose) => {
 			fr: String
 		},
 		conjugaison: [String],
-		created : { type: Date, default: Date.now },
-		updated : { type: Date, default: Date.now },
+		created : { type: Date },
+		updated : { type: Date },
 	});
-	mot = mongoose.model('Mots', Mots);
+	Mots.pre('save', function(next){
+		now = new Date();
+		this.updated = now;
+		if ( !this.created ) {
+			this.created = now;
+		}
+		next();
+	});
+	MOTS = mongoose.model('Mots', Mots);
 }
