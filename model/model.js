@@ -1,5 +1,6 @@
 module.exports = (mongoose) => {
 	let Schema = mongoose.Schema;
+
 	let Mots = new Schema({
 		al:  {type: String, required: true},
 		traduction: {
@@ -13,6 +14,7 @@ module.exports = (mongoose) => {
 		created : { type: Date },
 		updated : { type: Date },
 	});
+	
 	Mots.pre('save', function(next){
 		now = new Date();
 		this.updated = now;

@@ -21,10 +21,6 @@ db.once('open', function() {
 
 //define model
 require('./model/model.js')(mongoose);
-MOTS.findOne({al: 'test'}, function(err, m){
-  m.traduction.fr.push('une autre traduction')
-  m.save()
-})
 
 /*======================Settings App====================*/
 // Middleware session
