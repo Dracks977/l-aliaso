@@ -1,14 +1,17 @@
 module.exports = function(app, path, ejs, fs){
 
 	app.get('/', (req, res) => {
-		fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
-			if (err) {
-				res.end('error occurred' + err);
-				return;
-			} 
-			let renderedHtml = ejs.render(content, {});
-			res.end(renderedHtml);
-		});
+		MOTS.find(null,null,{sort: {'updated': -1}, limit: 20},(err, mots)=> {
+			console.log(mots)
+			fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
+				if (err) {
+					res.end('error occurred' + err);
+					return;
+				} 
+				let renderedHtml = ejs.render(content, {});
+				res.end(renderedHtml);
+			});
+		})
 	});
 
 	/*
@@ -18,7 +21,7 @@ module.exports = function(app, path, ejs, fs){
 		if (req.session.user) {
 			MOTS.findOne({al: req.body.al}, function(err, m){
 				console.log(m);
-				if (m.length != 0){
+				if (m && m.length != 0){
 					m.set(req.body);
 					m.save(function (err) {
 						if (err){
