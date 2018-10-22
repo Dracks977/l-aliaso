@@ -18,6 +18,8 @@ db.once('open', function() {
 
 //define model
 require('./model/model.js')(mongoose);
+var silence = new mot({al: 'test'})
+console.log(silence.al)
 
 /*======================Settings App====================*/
 // Middleware session
@@ -41,7 +43,7 @@ app.use("/img", express.static(__dirname + '/public/img'));
 app.use("/js", express.static(__dirname + '/public/js'));
 
 /*======================Routes==========================*/ 
-require('./src/index.js')(app, path, ejs, fs, sequelize);
+require('./src/index.js')(app, path, ejs, fs);
 
 
 

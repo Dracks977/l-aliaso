@@ -11,7 +11,7 @@ module.exports = (mongoose) => {
 			fr: String
 		},
 		conjugaison: [String],
-		created : { type: Date, required: true },
+		created : { type: Date, default: Date.now },
 		updated : { type: Date, default: Date.now },
 	});
 	mot = mongoose.model('Mots', Mots);

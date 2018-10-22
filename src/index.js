@@ -1,4 +1,4 @@
-module.exports = function(app, path, ejs, fs, sequelize){
+module.exports = function(app, path, ejs, fs){
 
 	app.get('/', function(req, res){
 		fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
