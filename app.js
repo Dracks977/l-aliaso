@@ -9,26 +9,16 @@ const ejs = require('ejs');
 const path = require('path');
 /*=====================Database=====================*/
 const session = require('express-session');
-const Sequelize = require('sequelize');
-const sequelize = new Sequelize('aliaso', 'user', 'user', {
-  host: 'localhost',
-  dialect: 'mysql',
-  operatorsAliases: false,
-  pool: {
-    max: 5,
-    min: 0,
-    acquire: 30000,
-    idle: 10000
-  }
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/aliaso');
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function() {
+  console.log('all ok')
 });
-//define model
-require('./model/model.js')(sequelize,Sequelize);
 
-sequelize.sync().then(() => {
-  console.log("DB created")
-}).catch(error => {
-  console.log(error)
-})
+//define model
+require('./model/model.js')(mongoose);
+
 /*======================Settings App====================*/
 // Middleware session
 app.engine('html', require('ejs').renderFile);
@@ -52,6 +42,8 @@ app.use("/js", express.static(__dirname + '/public/js'));
 
 /*======================Routes==========================*/ 
 require('./src/index.js')(app, path, ejs, fs, sequelize);
+
+
 
 /*==================Start serv==================*/
 http.listen(3000, function(){

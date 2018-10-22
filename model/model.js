@@ -1,57 +1,18 @@
-module.exports = (sequelize, Sequelize) => {
-	const Verbes = sequelize.define('verbes', {
-		'1': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
+module.exports = (mongoose) => {
+	let Schema = mongoose.Schema;
+	let Mots = new Schema({
+		al:  {type: String, required: true}
+		comments: [{ body: String, date: Date }],
+		traduction: {
+			fr: [String]
 		},
-		'2': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
+		desc: {
+			al: String,
+			fr: String
 		},
-		'3': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		},
-		'4': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		},
-		'5': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		},
-		'6': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		},
-		'7': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		},
-		'8': {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-		}
+		conjugaison: [String],
+		created : { type: Date, required: true },
+		updated : { type: Date, default: Date.now },
 	});
-
-	const Mots = sequelize.define('mots', {
-		fr: {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-			unique: true
-		},
-		al: {
-			type: Sequelize.STRING(100),
-			allowNull: false,
-			unique: true
-		},
-		verbe : {
-			type : Sequelize.INTEGER,
-			allowNull: true,
-			references: {
-				model: Verbes,
-				key: 'id'
-			}
-		}
-	});
+	mot = mongoose.model('Mots', Mots);
 }
