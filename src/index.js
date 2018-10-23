@@ -5,7 +5,7 @@ module.exports = function(app, path, ejs, fs){
 	*/
 	app.get('/', (req, res) => {
 		if (!req.query.q){
-			MOTS.find(null,null,{sort: {'updated': -1}, limit: 30},(err, mots)=> {
+			MOTS.find(null,null,{sort: {'updated': -1}, limit: 60},(err, mots)=> {
 				fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
 					if (err) {
 						res.end('error occurred' + err);
