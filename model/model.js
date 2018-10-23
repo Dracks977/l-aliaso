@@ -3,6 +3,7 @@ module.exports = (mongoose) => {
 
 	let Mots = new Schema({
 		al:  {type: String, required: true},
+		exemple : [String],
 		traduction: {
 			fr: [String]
 		},
@@ -10,7 +11,9 @@ module.exports = (mongoose) => {
 			al: String,
 			fr: String
 		},
-		conjugaison: [String],
+		conjugaison: {
+			present: [String]
+		},
 		created : { type: Date },
 		updated : { type: Date },
 	});

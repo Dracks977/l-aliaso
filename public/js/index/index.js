@@ -1,0 +1,23 @@
+$( document ).ready(function() {
+	$('#fall').click(function(){
+		$(".verbes-card").show();
+		$(".mots-card").show();
+		$('#fall').addClass("uk-active");
+		$("#fverbes").removeClass("uk-active");
+		$("#fmots").removeClass("uk-active");
+	});
+	$('#fverbes').click(function(){
+		$(".verbes-card").show();
+		$(".mots-card").hide();
+		$('#fverbes').addClass("uk-active");
+		$("#fall").removeClass("uk-active");
+		$("#fmots").removeClass("uk-active");
+	});
+	$('#fmots').click(function(){
+		$(".verbes-card").hide();
+		$(".mots-card").show();
+		$('#fmots').addClass("uk-active");
+		$("#fall").removeClass("uk-active");
+		$("#fverbes").removeClass("uk-active");
+	});
+});

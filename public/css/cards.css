@@ -8,6 +8,9 @@
 	background-color: white;
 	border-bottom: 1px solid rgba(0,0,0,0.06);
 }
+.nomarged {
+	margin-bottom: 0px
+}
 #site-foot {
 	position: fixed;
 	z-index: 3;
@@ -31,6 +34,7 @@
 	position: relative;
 	transition: box-shadow 0.15s ease-out;
 	border-radius: 3px;
+
 }
 .uk-card:hover {
 	box-shadow: 0 0 0 7px rgba(0,0,0,0.045);
@@ -50,22 +54,23 @@
 	font-size: 0.75rem;
 	letter-spacing: 0.01em;
 }
-.nature-card .uk-card {
+.mots-card .uk-card {
 	border-top-color: #1E87F0;
+	margin-bottom: 10% !important;
 }
 .uk-subnav li a {
 	border-radius: 3px; 
 }
-.uk-subnav li.uk-active:nth-child(3) a {
-	background-color:#8630F0;
-}
-.uk-subnav li.uk-active:nth-child(4) a {
+.uk-subnav li.uk-active:nth-child(2) a {
 	background-color:#F03A7F;
+}
+.uk-subnav li.uk-active:nth-child(3) a {
+	background-color:#1E87F0;
 }
 .uk-subnav li.uk-active:nth-child(5) a {
 	background-color:#E84DF0;
 }
-.nature-card .uk-card .cat-txt {
+.mots-card .uk-card .cat-txt {
 	color: #1E87F0;
 }
 .music-card .uk-card {
@@ -80,10 +85,11 @@
 .design-card .uk-card .cat-txt {
 	color: #E84DF0;
 }
-.photo-card .uk-card {
+.verbes-card .uk-card {
 	border-top-color: #F03A7F;
+	margin-bottom: 6% !important;
 }
-.photo-card .uk-card .cat-txt {
+.verbes-card .uk-card .cat-txt {
 	color: #F03A7F;
 }
 .uk-card .uk-overlay-primary {

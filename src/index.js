@@ -1,21 +1,53 @@
 module.exports = function(app, path, ejs, fs){
 
+	/*
+	// index avec les 30 dernier mots ajouter/mis a jour + le systeme de recherche
+	*/
 	app.get('/', (req, res) => {
-		MOTS.find(null,null,{sort: {'updated': -1}, limit: 20},(err, mots)=> {
-			console.log(mots)
-			fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
-				if (err) {
-					res.end('error occurred' + err);
-					return;
-				} 
-				let renderedHtml = ejs.render(content, {});
-				res.end(renderedHtml);
-			});
-		})
+		if (!req.query.q){
+			MOTS.find(null,null,{sort: {'updated': -1}, limit: 30},(err, mots)=> {
+				fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
+					if (err) {
+						res.end('error occurred' + err);
+						return;
+					} 
+					let renderedHtml = ejs.render(content, {mots: mots});
+					res.end(renderedHtml);
+				});
+			})
+		} else {
+			let regex = new RegExp('.*' + req.query.q + '.*', "i")
+			MOTS.find({$or: [{"al": {$regex: regex}},{"traduction.fr": {$regex: regex}}/*, {"desc.fr": {$regex: regex}}*/]} , null, {sort: {'updated': -1}, limit: 30}, (err, mots) => {
+				fs.readFile(path.resolve(__dirname + '/../view/index.html'), 'utf-8', function(err, content) {
+					if (err) {
+						res.end('error occurred' + err);
+						return;
+					} 
+					let renderedHtml = ejs.render(content, {mots: mots});
+					res.end(renderedHtml);
+				});
+			})
+		}
 	});
 
-	/*
-	// Ajout/modification mots (al est un champ unique)
+		
+	/* Ajout/modification mots (al est un champ unique)
+	// {
+	// 	al:  {type: String, required: true},
+	// 	exemple : [String],
+	// 	traduction: {
+	// 		fr: [String]
+	// 	},
+	// 	desc: {
+	// 		al: String,
+	// 		fr: String
+	// 	},
+	// 	conjugaison: {
+	// 		present: [String]
+	// 	},
+	// 	created : { type: Date },
+	// 	updated : { type: Date },
+	// }
 	*/
 	app.post('/mots', (req, res) => {
 		if (req.session.user) {
