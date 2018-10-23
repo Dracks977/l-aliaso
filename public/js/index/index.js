@@ -9,8 +9,24 @@ function trad() {
 }
 
 function addworld(){
-	ici faut faire en sorte de recupe tout les info et faire un post
-	// $.post( "ajax/test.html", function( data ) {
-	// 	$( ".result" ).html( data );
-	// });
+	// ici faut faire en sorte de recupe tout les info et faire un post
+	let object = new Object();
+	object.al = $('#f-al').val();
+	object.traduction = new Object();
+	object.traduction.fr = ($('#f-fr').val()).split(';');
+	object.exemple = $('#f-ex').val().split("\n");
+	object.desc = new Object();
+	object.desc.fr = $('#f-desc').val();
+	if (document.querySelectorAll("#f-conj-p")[0].value) {
+	object.conjugaison = new Object()
+	object.conjugaison.present = new Array();
+	$(document.querySelectorAll("#f-conj-p")).each(function(e, a){
+		object.conjugaison.present.push(a.value)
+	})
+	}
+	console.log(object)
+
+	$.post( "/mots",object, function( data ) {
+		console.log(data)
+	});
 }

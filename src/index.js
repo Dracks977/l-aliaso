@@ -13,6 +13,7 @@ module.exports = function(app, path, ejs, fs){
 						res.end('error occurred' + err);
 						return;
 					} 
+					console.log(mots)
 					let renderedHtml = ejs.render(content, {mots: mots, user: req.session.user});
 					res.end(renderedHtml);
 				});
@@ -107,9 +108,19 @@ module.exports = function(app, path, ejs, fs){
 
 	})
 
-	app.post('/login', (req, res) => {
-		req.session.user = "admin";
-		res.send(req.session)
+	app.get('/login', (req, res) => {
+		res.sendFile(path.resolve('view/login.html'))
 	})
+
+	app.post('/login', (req, res) => {
+		console.log()
+		if (req.body.pass != "aliaso4ever")
+			res.status(401).send({ error: "bad password" });
+		else {
+			req.session.user = true;
+			res.status(200).send({ msg: true });
+		}
+	})
+	
 
 }

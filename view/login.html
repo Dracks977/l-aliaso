@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="uk-height-1-1">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login - UIkit 3 KickOff</title>
+	<link rel="icon" href="img/favicon.ico">
+	<!-- CSS FILES -->
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.6/css/uikit.min.css">
+</head>
+<body class="uk-height-1-1">
+	<div class="uk-flex uk-flex-center uk-flex-middle uk-background-muted uk-height-viewport">
+		<div class="uk-position-bottom-center uk-position-small uk-visible@m">
+			<span class="uk-text-small uk-text-muted">© 2017 Company Name - <a href="https://github.com/zzseba78/Kick-Off">Created by KickOff</a> | Built with <a href="http://getuikit.com" title="Visit UIkit 3 site" target="_blank" data-uk-tooltip><span data-uk-icon="uikit"></span></a></span>
+		</div>
+		<div class="uk-width-medium uk-padding-small">
+				<fieldset class="uk-fieldset">
+					<legend class="uk-legend uk-text-center">Login</legend>
+					<div class="uk-margin">
+						<div class="uk-inline uk-width-1-1">
+							<span class="uk-form-icon uk-form-icon-flip" data-uk-icon="icon: lock"></span>
+							<input id="pass" class="uk-input uk-form-large" required placeholder="Password" type="password">
+						</div>
+					</div>
+					
+				</fieldset>
+			<div class="">
+						<button type="submit" class="uk-button uk-button-primary uk-button-primary uk-button-large uk-width-1-1" onclick="login()">LOG IN</button>
+					</div>
+			<div>
+			</div>
+		</div>
+	</div>
+
+	<!-- JS FILES -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.6/js/uikit.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-rc.6/js/uikit-icons.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script type="text/javascript">
+		function login() {
+			$.post( "/login",{pass: $('#pass').val()}, function(data) {
+				if (data.msg == true) {
+					window.location.href = "/";
+				}
+			});
+		}
+	</script>
+</body>
+</html>
