@@ -1,23 +1,16 @@
-$( document ).ready(function() {
-	$('#fall').click(function(){
-		$(".verbes-card").show();
-		$(".mots-card").show();
-		$('#fall').addClass("uk-active");
-		$("#fverbes").removeClass("uk-active");
-		$("#fmots").removeClass("uk-active");
+function trad() {
+	$('#mdivtrad').empty();
+	console.log($('#mtrad').val())
+	$.get( "/mots/gtranslate?q=" + $('#mtrad').val(), function( data ) {
+		for (var i = 0; i < data.length; i++) {
+			$('#mdivtrad').append("<tr><td>"+data[i].to+"</td><td>"+data[i].v+"</td></tr>");
+		}			
 	});
-	$('#fverbes').click(function(){
-		$(".verbes-card").show();
-		$(".mots-card").hide();
-		$('#fverbes').addClass("uk-active");
-		$("#fall").removeClass("uk-active");
-		$("#fmots").removeClass("uk-active");
-	});
-	$('#fmots').click(function(){
-		$(".verbes-card").hide();
-		$(".mots-card").show();
-		$('#fmots').addClass("uk-active");
-		$("#fall").removeClass("uk-active");
-		$("#fverbes").removeClass("uk-active");
-	});
-});
+}
+
+function addworld(){
+	ici faut faire en sorte de recupe tout les info et faire un post
+	// $.post( "ajax/test.html", function( data ) {
+	// 	$( ".result" ).html( data );
+	// });
+}

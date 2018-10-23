@@ -1,3 +1,5 @@
+const translate = require('translate-google');
+
 module.exports = function(app, path, ejs, fs){
 
 	/*
@@ -11,7 +13,7 @@ module.exports = function(app, path, ejs, fs){
 						res.end('error occurred' + err);
 						return;
 					} 
-					let renderedHtml = ejs.render(content, {mots: mots});
+					let renderedHtml = ejs.render(content, {mots: mots, user: req.session.user});
 					res.end(renderedHtml);
 				});
 			})
@@ -23,14 +25,39 @@ module.exports = function(app, path, ejs, fs){
 						res.end('error occurred' + err);
 						return;
 					} 
-					let renderedHtml = ejs.render(content, {mots: mots});
+					let renderedHtml = ejs.render(content, {mots: mots, user: req.session.user});
 					res.end(renderedHtml);
 				});
 			})
 		}
 	});
 
-		
+	app.get('/mots/gtranslate', (req, ress) => {
+		let result = new Array();
+		translate(req.query.q, {to: 'la'}).then(res => {
+			result.push({to: 'Latin:', v: res});
+			translate(req.query.q, {to: 'en'}).then(res => {
+				result.push({to: 'Anglais:', v: res});
+				translate(req.query.q, {to: 'de'}).then(res => {
+					result.push({to: 'Allemand:', v: res});
+					translate(req.query.q, {to: 'es'}).then(res => {
+						result.push({to: 'Espagnol:', v: res});
+						ress.send(result);
+					}).catch(err => {
+						console.error(err)
+					})
+				}).catch(err => {
+					console.error(err)
+				})
+			}).catch(err => {
+				console.error(err)
+			})
+		}).catch(err => {
+			console.error(err)
+		})
+	})
+
+
 	/* Ajout/modification mots (al est un champ unique)
 	// {
 	// 	al:  {type: String, required: true},
