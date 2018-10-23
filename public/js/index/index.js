@@ -14,7 +14,8 @@ function addworld(){
 	object.al = $('#f-al').val();
 	object.traduction = new Object();
 	object.traduction.fr = ($('#f-fr').val()).split(';');
-	object.exemple = $('#f-ex').val().split("\n");
+	if ($('#f-ex').val())
+		object.exemple = $('#f-ex').val().split("\n");
 	object.desc = new Object();
 	object.desc.fr = $('#f-desc').val();
 	if (document.querySelectorAll("#f-conj-p")[0].value) {
